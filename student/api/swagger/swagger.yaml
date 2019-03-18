@@ -1,0 +1,390 @@
+openapi: 3.0.0
+info:
+  title: students APIs
+  description: APIs available for students
+  version: 1.0.0
+servers:
+- url: http://192.168.27.3:8081/web/services/university
+  description: IBM i Test server
+paths:
+  /student/{id}:
+    get:
+      tags:
+      - students APIs
+      description: list student data in the database on base studentID
+      operationId: getByID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maxLength: 9
+          pattern: \w{9}
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getByIDResult'
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      - user
+      x-swagger-router-controller: StudentsAPIs
+    delete:
+      tags:
+      - students APIs
+      description: delete student data from the database on base studentID
+      operationId: remove
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maxLength: 9
+          pattern: \w{9}
+          type: string
+      responses:
+        200:
+          description: Successful operation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      x-swagger-router-controller: StudentsAPIs
+  /students:
+    get:
+      tags:
+      - students APIs
+      description: list all students in the database
+      operationId: getAll
+      parameters: []
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAllResult'
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      - user
+      x-swagger-router-controller: StudentsAPIs
+    put:
+      tags:
+      - students APIs
+      description: update student data in the database
+      operationId: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/studentRec'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateResult'
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      x-swagger-router-controller: StudentsAPIs
+    post:
+      tags:
+      - students APIs
+      description: add a new student data to the database
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/studentRec'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createResult'
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      x-swagger-router-controller: StudentsAPIs
+  /user:
+    post:
+      tags:
+      - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      x-swagger-router-controller: User
+  /user/login:
+    post:
+      tags:
+      - user
+      summary: Logs user into the system
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authentication'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+      x-swagger-router-controller: User
+  /user/logout:
+    get:
+      tags:
+      - user
+      summary: Logs out current logged in user session
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: User
+  /user/{username}:
+    get:
+      tags:
+      - user
+      summary: Get user by user name
+      description: This can only be done by the logged in user.
+      operationId: getUserByName
+      parameters:
+      - name: username
+        in: path
+        description: name that need to be observed
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid username supplied
+        404:
+          description: User not found
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      - user
+      x-swagger-router-controller: User
+    put:
+      tags:
+      - user
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+      - name: username
+        in: path
+        description: name that need to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        400:
+          description: Invalid user supplied
+        404:
+          description: User not found
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      - user
+      x-swagger-router-controller: User
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+      - name: username
+        in: path
+        description: The name that needs to be deleted
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        400:
+          description: Invalid username supplied
+        404:
+          description: User not found
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - admin
+      x-swagger-router-controller: User
+components:
+  schemas:
+    getByIDResult:
+      type: object
+      properties:
+        student:
+          $ref: '#/components/schemas/studentRec'
+      example:
+        student:
+          studentID: studentID
+          firstName: firstName
+          lastName: lastName
+          gender: gender
+    studentRec:
+      type: object
+      properties:
+        studentID:
+          maxLength: 9
+          type: string
+        firstName:
+          maxLength: 50
+          type: string
+        lastName:
+          maxLength: 50
+          type: string
+        gender:
+          maxLength: 10
+          type: string
+      example:
+        studentID: studentID
+        firstName: firstName
+        lastName: lastName
+        gender: gender
+    updateResult:
+      type: object
+      properties:
+        student:
+          $ref: '#/components/schemas/studentRec'
+      example:
+        student:
+          studentID: studentID
+          firstName: firstName
+          lastName: lastName
+          gender: gender
+    createResult:
+      type: object
+      properties:
+        student:
+          $ref: '#/components/schemas/studentRec'
+      example:
+        student:
+          studentID: studentID
+          firstName: firstName
+          lastName: lastName
+          gender: gender
+    getAllResult:
+      type: object
+      properties:
+        students:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/studentRec'
+    User:
+      type: object
+      properties:
+        userID:
+          type: integer
+          format: int32
+        username:
+          maxLength: 10
+          type: string
+        firstName:
+          maxLength: 50
+          type: string
+        lastName:
+          maxLength: 50
+          type: string
+        email:
+          maxLength: 50
+          type: string
+        password:
+          maxLength: 20
+          type: string
+          format: password
+        phone:
+          maxLength: 15
+          type: string
+        userStatus:
+          type: integer
+          description: User Status
+          format: int32
+      example:
+        firstName: firstName
+        lastName: lastName
+        password: password
+        userStatus: 6
+        phone: phone
+        userID: 0
+        email: email
+        username: username
+    Authentication:
+      type: object
+      properties:
+        username:
+          type: string
+          example: username
+        password:
+          type: string
+          format: password
+          example: password
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

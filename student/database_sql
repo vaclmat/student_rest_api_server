@@ -1,0 +1,32 @@
+CREATE SCHEMA STUDENTRSC
+
+CREATE TABLE STUDENTRSC.STUDENTDB
+ ("Student ID"  FOR COLUMN studentID CHAR (9) NOT NULL,   
+  "First Name"  FOR COLUMN firstName CHAR (50) NOT NULL,
+  "last Name"   FOR COLUMN lastName  CHAR (50) NOT NULL,
+  "Gender Type" FOR COLUMN gender CHAR (10) NOT NULL,
+  PRIMARY KEY ( studentID ))
+  RCDFMT studentr
+
+SET SCHEMA STUDENTRSC
+
+INSERT INTO STUDENTRSC.STUDENTDB
+ (studentID, firstName, lastName, gender)
+ VALUES('823M934LA', 'Nadir', 'Amra', 'Male'),
+       ('826M660CF', 'John', 'Doe', 'Male'),
+       ('747F023ZX', 'Jane', 'Amra', 'Female')
+
+CREATE TABLE STUDENTRSC/APIUSERSDB
+("API User ID"  FOR COLUMN userID SMALLINT NOT NULL,
+"API User Name" FOR COLUMN userName CHAR (10) NOT NULL,
+"First Name"  FOR COLUMN firstName CHAR (50) NOT NULL,
+"Last Name"   FOR COLUMN lastName  CHAR (50) NOT NULL,
+"Email" FOR COLUMN email CHAR (50) NOT NULL,
+"Password" FOR COLUMN password CHAR(20) NOT NULL,
+"Phone" FOR COLUMN phone CHAR(15) NOT NULL,
+"User Status" FOR COLUMN userStatus SMALLINT NOT NULL,
+PRIMARY KEY ( userID ))
+RCDFMT apiuserr
+
+INSERT INTO STUDENTRSC/APIUSERSDB (userID, userName, firstName, lastName, email, password, phone, userStatus)
+VALUES(1, 'admin', 'Karl', 'New', 'karl.new@domain.eu', 'admin', '123456789', 1 )
