@@ -9,10 +9,12 @@
   "main": "app.js",
   "dependencies": {
     "accesscontrol": "^2.2.1",
-    "connect": "^3.6.6",
-    "express": "^4.12.3",
-    "idb-pconnector": "^1.0.2",
-    "oas-tools": "^2.1.4",
+    "connect": "^3.7.0",
+    "deep-extend": "^0.6.0",
+    "express": "^4.17.1",
+    "idb-pconnector": "^1.0.5",
+    "lodash": "^4.17.11",
+    "oas-tools": "^2.1.6",
     "oas3-tools": "^1.0.1",
     "swagger-express-mw": "^0.7.0"
   },

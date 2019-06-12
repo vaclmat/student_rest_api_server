@@ -4,6 +4,7 @@
 var fs = require('fs'),
     path = require('path'),
     http = require('http'),
+    https = require('https'),
     auth = require('./api/helpers/auth');
 
 
