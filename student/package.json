@@ -11,11 +11,11 @@
     "accesscontrol": "^2.2.1",
     "connect": "^3.7.0",
     "deep-extend": "^0.6.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "idb-pconnector": "^1.0.7",
     "lodash": "^4.17.14",
     "oas-tools": "^2.1.6",
-    "oas3-tools": "^1.0.1",
+    "oas3-tools": "^2.2.3",
     "swagger-express-mw": "^0.7.0"
   },
   "devDependencies": {
