@@ -11,7 +11,7 @@
     "accesscontrol": "^2.2.1",
     "connect": "^3.7.0",
     "deep-extend": "^0.6.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "idb-pconnector": "^1.0.7",
     "lodash": "^4.17.14",
     "oas-tools": "^2.1.6",
