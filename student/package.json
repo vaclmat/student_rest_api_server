@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "idb-pconnector": "^1.0.7",
     "lodash": "^4.17.14",
-    "oas-tools": "^2.1.6",
+    "oas-tools": "^3.0.0",
     "oas3-tools": "^1.0.1",
     "swagger-express-mw": "^0.7.0"
   },
